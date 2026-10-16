@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MPI Darsana Quest — Agama Hindu & Budi Pekerti Kelas XI SMA</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy-deep': '#1E3A8A',
+                        'blue-royal': '#2563EB',
+                        'blue-sky': '#60A5FA',
+                        'blue-light': '#EFF6FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Mobile-First Optimized Styling */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #334155;
+            background-color: #F8FAFC;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .bg-gradient-darsana {
+            background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #60A5FA 100%);
+        }
+
+        .mindmap-node {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .mindmap-node:active {
+            transform: scale(0.97);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #EFF6FF;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #60A5FA;
+            border-radius: 9999px;
+        }
+
+        .view-panel {
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(3px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes toastSlide {
+            0% { opacity: 0; transform: translateY(-15px) scale(0.95); }
+            15% { opacity: 1; transform: translateY(0) scale(1); }
+            85% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-15px) scale(0.95); }
+        }
+
+        .animate-toast {
+            animation: toastSlide 3.2s ease-in-out forwards;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-certificate, #printable-certificate * {
+                visibility: visible;
+            }
+            #printable-certificate {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-blue-200 selection:text-blue-900">
+
+    <!-- Mobile Toast Banner for XP & Badges -->
+    <div id="quest-toast" class="fixed top-14 left-3 right-3 sm:left-auto sm:right-4 z-50 hidden max-w-sm bg-white border-2 border-[#2563EB] p-3 rounded-2xl shadow-xl flex items-center gap-2.5">
+        <div id="toast-icon" class="w-9 h-9 rounded-xl bg-gradient-darsana text-white text-lg flex items-center justify-center shrink-0">
+            ⚡
+        </div>
+        <div class="overflow-hidden">
+            <h4 id="toast-title" class="text-xs font-extrabold text-[#1E3A8A] truncate">XP Diterima!</h4>
+            <p id="toast-desc" class="text-[10px] text-slate-600 leading-tight truncate">Kamu mendapatkan +50 XP dari aktivitas ini.</p>
+        </div>
+    </div>
+
+    <!-- Mobile Friendly Navigation Header -->
+    <header class="bg-white border-b border-blue-100 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 py-2 sm:px-6">
+            <div class="flex justify-between items-center gap-2">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-2 cursor-pointer shrink-0" onclick="handleNavClick('dashboard')">
+                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-darsana flex items-center justify-center text-white text-base font-bold shadow-md shrink-0">
+                        🕉️
+                    </div>
+                    <div>
+                        <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-[#2563EB] block leading-none">Darsana Quest XI</span>
+                        <h1 class="text-xs sm:text-sm font-extrabold text-[#1E3A8A] leading-tight">FILSAFAT HINDU</h1>
+                    </div>
+                </div>
+
+                <!-- XP & Level Badge Header Bar -->
+                <div id="header-gamify-bar" class="flex items-center gap-1.5 bg-[#EFF6FF] border border-blue-200 px-2 py-1 rounded-xl">
+                    <span id="hdr-lvl-badge" class="px-1.5 py-0.5 rounded-md bg-[#2563EB] text-white text-[9px] font-extrabold uppercase">Lvl 1</span>
+                    <div class="w-12 sm:w-20 bg-white rounded-full h-1.5 overflow-hidden border border-blue-200">
+                        <div id="hdr-xp-bar" class="bg-gradient-darsana h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                    <span id="hdr-xp-text" class="text-[9px] font-extrabold text-[#2563EB]">0 XP</span>
+                </div>
+
+                <!-- Action Button Profile / Menu -->
+                <div class="flex items-center gap-1">
+                    <button id="student-badge" onclick="navigateTo('profil')" class="flex items-center gap-1 bg-[#EFF6FF] border border-blue-200 px-2 py-1 rounded-full hover:bg-blue-100 transition">
+                        <div id="badge-avatar" class="w-5 h-5 rounded-full bg-gradient-darsana text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                            ?
+                        </div>
+                        <span id="badge-name" class="text-[10px] font-bold text-[#1E3A8A] hidden sm:inline max-w-[80px] truncate">Profil</span>
+                    </button>
+
+                    <button onclick="toggleMobileMenu()" class="text-slate-700 hover:text-[#2563EB] p-1.5 rounded-lg focus:outline-none">
+                        <i class="fa-solid fa-bars text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compact Navigation Menu -->
+        <div id="mobile-menu" class="hidden bg-white border-b border-blue-100 px-3 py-2 space-y-1 shadow-lg text-xs">
+            <div class="grid grid-cols-2 gap-1.5 pb-1 border-b border-blue-50">
+                <button onclick="handleNavClick('dashboard'); toggleMobileMenu()" class="p-2 rounded-xl text-slate-700 hover:bg-[#EFF6FF] hover:text-[#2563EB] font-semibold text-left flex items-center gap-1.5">
+                    🏠 <span>Beranda</span>
+                </button>
+                <button onclick="handleNavClick('questmap'); toggleMobileMenu()" class="p-2 rounded-xl text-slate-700 hover:bg-[#EFF6FF] hover:text-[#2563EB] font-semibold text-left flex items-center gap-1.5">
+                    🗺️ <span>Peta Quest</span>
+                </button>
+                <button onclick="handleNavClick('materi'); toggleMobileMenu()" class="p-2 rounded-xl text-slate-700 hover:bg-[#EFF6FF] hover:text-[#2563EB] font-semibold text-left flex items-center gap-1.5">
+                    📚 <span>Modul Materi</span>
+                </button>
+                <button onclick="handleNavClick('mindmap'); toggleMobileMenu()" class="p-2 rounded-xl text-slate-700 hover:bg-[#EFF6FF] hover:text-[#2563EB] font-semibold text-left flex items-center gap-1.5">
+                    🧠 <span>Mind Map</span>
+                </button>
+                <button onclick="handleNavClick('kuis'); toggleMobileMenu()" class="p-2 rounded-xl text-slate-700 hover:bg-[#EFF6FF] hover:text-[#2563EB] font-semibold text-left flex items-center gap-1.5">
+                    📝 <span>Latihan Kuis</span>
+                </button>
+                <button onclick="handleNavClick('profil'); toggleMobileMenu()" class="p-2 rounded-xl text-slate-700 hover:bg-[#EFF6FF] hover:text-[#2563EB] font-semibold text-left flex items-center gap-1.5">
+                    🏆 <span>Profil & Badge</span>
+                </button>
+            </div>
+            <button onclick="openEditIdentityModal(); toggleMobileMenu()" class="w-full text-left p-2 rounded-xl text-[#2563EB] bg-[#EFF6FF] font-bold flex items-center justify-between">
+                <span>👤 Edit Identitas Siswa</span>
+                <i class="fa-solid fa-pen text-[10px]"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-2.5 sm:px-6 py-3">
+
+        <!-- VIEW 1: OPENING HERO -->
+        <section id="sec-opening" class="view-panel space-y-3 py-1">
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-darsana text-white p-5 sm:p-8 shadow-md text-center sm:text-left">
+                <div class="relative z-10 space-y-2.5 max-w-2xl">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full bg-white/20 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">
+                        ⚡ Petualangan Edukasi Darsana Quest
+                    </span>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                        DARSANA QUEST
+                    </h1>
+                    <p class="text-blue-100 text-xs sm:text-sm leading-snug">
+                        Media Pembelajaran Interaktif Agama Hindu & Budi Pekerti Kelas XI SMA. Pelajari Sad Darsana dengan cara seru!
+                    </p>
+                    <div class="pt-1">
+                        <button onclick="proceedFromOpening()" class="w-full sm:w-auto bg-white text-[#1E3A8A] font-extrabold px-5 py-3 rounded-xl shadow hover:bg-blue-50 transition flex items-center justify-center gap-2 text-xs">
+                            <span>🚀 Mulai Petualangan & Registrasi</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                    <span class="text-lg block">🗺️</span>
+                    <h3 class="font-bold text-[#1E3A8A] text-[10px]">Peta Quest</h3>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                    <span class="text-lg block">⚡</span>
+                    <h3 class="font-bold text-[#1E3A8A] text-[10px]">XP & Level</h3>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                    <span class="text-lg block">🎓</span>
+                    <h3 class="font-bold text-[#1E3A8A] text-[10px]">Sertifikat</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: MANUAL STUDENT IDENTITY FORM -->
+        <section id="sec-identitas" class="view-panel hidden max-w-md mx-auto py-2">
+            <div class="bg-white rounded-2xl border border-blue-100 p-4 sm:p-6 shadow-md space-y-4">
+                <div class="text-center space-y-1">
+                    <div class="w-10 h-10 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-xl mx-auto">
+                        👤
+                    </div>
+                    <h2 class="text-base font-extrabold text-[#1E3A8A]">Registrasi Siswa</h2>
+                    <p class="text-[11px] text-slate-500">Ketikkan data diri Anda untuk mencatat progres & sertifikat.</p>
+                </div>
+
+                <div id="identitas-error" class="hidden p-2.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
+                    <span>⚠️</span>
+                    <span id="identitas-error-text">Mohon isi semua kolom secara manual!</span>
+                </div>
+
+                <!-- Manual Input Fields -->
+                <form id="form-identitas" onsubmit="submitIdentitas(event)" class="space-y-3">
+                    <div>
+                        <label for="input-nama" class="block text-[11px] font-bold text-[#1E3A8A] uppercase mb-1">
+                            Nama Lengkap Siswa <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="input-nama" placeholder="Ketik nama lengkap" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div>
+                            <label for="input-absen" class="block text-[11px] font-bold text-[#1E3A8A] uppercase mb-1">
+                                Nomor Absen <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="input-absen" placeholder="Ketik nomor absen" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none">
+                        </div>
+                        <div>
+                            <label for="input-kelas" class="block text-[11px] font-bold text-[#1E3A8A] uppercase mb-1">
+                                Kelas <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="input-kelas" placeholder="Ketik kelas (misal: XI MIPA 1)" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none">
+                        </div>
+                    </div>
+
+                    <div class="pt-1">
+                        <button type="submit" class="w-full bg-gradient-darsana hover:opacity-95 text-white font-bold py-2.5 px-4 rounded-xl shadow transition text-xs flex items-center justify-center gap-1.5">
+                            <span>🚀 Mulai Belajar & Klaim Badge</span>
+                        </button>
+                    </div>
+                </form>
+
+                <p class="text-[9px] text-center text-slate-400">
+                    * Data tersimpan aman di memori perangkat ini.
+                </p>
+            </div>
+        </section>
+
+        <!-- VIEW 3: MAIN DASHBOARD -->
+        <section id="sec-dashboard" class="view-panel hidden space-y-4">
+            <div class="bg-gradient-darsana text-white rounded-2xl p-4 sm:p-6 shadow-md space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-white/20 text-[9px] font-bold uppercase tracking-wider">
+                            👋 Beranda Quest
+                        </span>
+                        <h2 class="text-base sm:text-xl font-extrabold text-white" id="dashboard-greeting">
+                            Selamat belajar!
+                        </h2>
+                        <p class="text-[11px] text-blue-100" id="dashboard-subtext">
+                            Kelas: - | No. Absen: -
+                        </p>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button onclick="resumeLastTopic()" class="px-3 py-1.5 rounded-xl bg-white text-[#1E3A8A] font-bold text-xs hover:bg-blue-50 transition shadow">
+                            ▶️ Lanjutkan
+                        </button>
+                        <button onclick="navigateTo('profil')" class="px-3 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-semibold text-xs transition border border-white/30">
+                            🏆 Profil
+                        </button>
+                    </div>
+                </div>
+
+                <!-- XP & Capaian Bar -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    <div class="bg-white/10 p-3 rounded-xl border border-white/20 space-y-1.5">
+                        <div class="flex justify-between items-center text-[11px] font-semibold">
+                            <span>⚡ Total XP</span>
+                            <span id="dash-lvl-title" class="font-bold text-amber-200">Lvl 1: Siswa Jñana</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+                            <div id="dash-xp-bar" class="bg-gradient-to-r from-amber-300 to-yellow-100 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-blue-100">
+                            <span id="dash-xp-text">0 XP</span>
+                            <span id="dash-xp-next">Target Lvl 2: 100 XP</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/10 p-3 rounded-xl border border-white/20 space-y-1.5">
+                        <div class="flex justify-between items-center text-[11px] font-semibold">
+                            <span>📊 Progres Darsana</span>
+                            <span id="dash-progress-pct">0% Selesai</span>
+                        </div>
+                        <div class="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+                            <div id="dash-progress-bar" class="bg-gradient-to-r from-blue-200 to-white h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-blue-100">
+                            <span id="dash-materi-stat">Subbab: 0 / 4</span>
+                            <span id="dash-quiz-stat">Kuis: Belum</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Access Menu Grid -->
+            <div class="space-y-2">
+                <h3 class="text-xs font-extrabold text-[#1E3A8A] flex items-center gap-1.5">
+                    🚀 Menu Pembelajaran Darsana
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    
+                    <div onclick="navigateTo('questmap')" class="cursor-pointer bg-white p-3 rounded-xl border border-blue-100 shadow-sm hover:border-[#60A5FA] transition space-y-1">
+                        <div class="w-7 h-7 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-sm">
+                            🗺️
+                        </div>
+                        <h4 class="font-bold text-[#1E3A8A] text-xs">1. Peta Quest</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Jalur petualangan belajar.</p>
+                    </div>
+
+                    <div onclick="navigateTo('materi')" class="cursor-pointer bg-white p-3 rounded-xl border border-blue-100 shadow-sm hover:border-[#60A5FA] transition space-y-1">
+                        <div class="w-7 h-7 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-sm">
+                            📚
+                        </div>
+                        <h4 class="font-bold text-[#1E3A8A] text-xs">2. Modul Materi</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Pengertian & Sad Darsana.</p>
+                    </div>
+
+                    <div onclick="navigateTo('mindmap')" class="cursor-pointer bg-white p-3 rounded-xl border border-blue-100 shadow-sm hover:border-[#60A5FA] transition space-y-1">
+                        <div class="w-7 h-7 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-sm">
+                            🧠
+                        </div>
+                        <h4 class="font-bold text-[#1E3A8A] text-xs">3. Mind Map</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Visual interaktif simpul.</p>
+                    </div>
+
+                    <div onclick="navigateTo('kuis')" class="cursor-pointer bg-white p-3 rounded-xl border border-blue-100 shadow-sm hover:border-[#60A5FA] transition space-y-1">
+                        <div class="w-7 h-7 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-sm">
+                            📝
+                        </div>
+                        <h4 class="font-bold text-[#1E3A8A] text-xs">4. Evaluasi Kuis</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">10 Soal pilihan ganda.</p>
+                    </div>
+
+                    <div onclick="navigateTo('profil')" class="cursor-pointer bg-white p-3 rounded-xl border border-blue-100 shadow-sm hover:border-[#60A5FA] transition space-y-1">
+                        <div class="w-7 h-7 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-sm">
+                            🏆
+                        </div>
+                        <h4 class="font-bold text-[#1E3A8A] text-xs">5. Profil & Badge</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Badge & Cetak Sertifikat.</p>
+                    </div>
+
+                    <div onclick="navigateTo('ringkasan')" class="cursor-pointer bg-white p-3 rounded-xl border border-blue-100 shadow-sm hover:border-[#60A5FA] transition space-y-1">
+                        <div class="w-7 h-7 rounded-lg bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-sm">
+                            💡
+                        </div>
+                        <h4 class="font-bold text-[#1E3A8A] text-xs">6. Glosarium</h4>
+                        <p class="text-[10px] text-slate-500 leading-tight">Istilah & Refleksi.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: PETA QUEST INTERAKTIF -->
+        <section id="sec-questmap" class="view-panel hidden space-y-3">
+            <div class="bg-white p-3 rounded-2xl border border-blue-100 shadow-sm flex items-center justify-between gap-2">
+                <div>
+                    <h2 class="text-sm font-extrabold text-[#1E3A8A] flex items-center gap-1.5">
+                        🗺️ Peta Quest Darsana
+                    </h2>
+                    <p class="text-[10px] text-slate-500">Sentuh titik petualangan untuk mulai belajar!</p>
+                </div>
+                <button onclick="navigateTo('materi')" class="text-[10px] text-[#2563EB] bg-[#EFF6FF] px-2.5 py-1 rounded-lg border border-blue-200 font-bold shrink-0">
+                    📚 Daftar Bebas
+                </button>
+            </div>
+
+            <!-- Quest Roadmap Visual Nodes -->
+            <div class="bg-white rounded-2xl border border-blue-100 p-3.5 shadow-sm space-y-3">
+                
+                <!-- Quest Node 1 -->
+                <div class="flex items-center justify-between gap-2 bg-[#EFF6FF] p-3 rounded-xl border border-blue-200">
+                    <div class="flex items-center gap-2.5 overflow-hidden">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-darsana text-white font-extrabold flex items-center justify-center text-sm shadow shrink-0">
+                            1
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="text-[9px] font-bold text-[#2563EB] uppercase block leading-none">Quest 1 • +50 XP</span>
+                            <h3 class="text-xs font-bold text-[#1E3A8A] truncate">Pengertian Darsana & Astika</h3>
+                        </div>
+                    </div>
+                    <button onclick="openSubtopicReader('pengertian')" class="px-3 py-1.5 rounded-lg bg-[#2563EB] text-white font-bold text-[11px] shadow shrink-0">
+                        Mulai
+                    </button>
+                </div>
+
+                <!-- Quest Node 2 -->
+                <div class="flex items-center justify-between gap-2 bg-[#EFF6FF] p-3 rounded-xl border border-blue-200">
+                    <div class="flex items-center gap-2.5 overflow-hidden">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-darsana text-white font-extrabold flex items-center justify-center text-sm shadow shrink-0">
+                            2
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="text-[9px] font-bold text-[#2563EB] uppercase block leading-none">Quest 2 • +50 XP</span>
+                            <h3 class="text-xs font-bold text-[#1E3A8A] truncate">Enam Aliran Sad Darsana</h3>
+                        </div>
+                    </div>
+                    <button onclick="openSubtopicReader('saddarsana')" class="px-3 py-1.5 rounded-lg bg-[#2563EB] text-white font-bold text-[11px] shadow shrink-0">
+                        Mulai
+                    </button>
+                </div>
+
+                <!-- Quest Node 3 -->
+                <div class="flex items-center justify-between gap-2 bg-[#EFF6FF] p-3 rounded-xl border border-blue-200">
+                    <div class="flex items-center gap-2.5 overflow-hidden">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-darsana text-white font-extrabold flex items-center justify-center text-sm shadow shrink-0">
+                            3
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="text-[9px] font-bold text-[#2563EB] uppercase block leading-none">Quest 3 • +50 XP</span>
+                            <h3 class="text-xs font-bold text-[#1E3A8A] truncate">Tabel Komparasi Aliran</h3>
+                        </div>
+                    </div>
+                    <button onclick="openSubtopicReader('komparasi')" class="px-3 py-1.5 rounded-lg bg-[#2563EB] text-white font-bold text-[11px] shadow shrink-0">
+                        Mulai
+                    </button>
+                </div>
+
+                <!-- Quest Node 4 -->
+                <div class="flex items-center justify-between gap-2 bg-[#EFF6FF] p-3 rounded-xl border border-blue-200">
+                    <div class="flex items-center gap-2.5 overflow-hidden">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-darsana text-white font-extrabold flex items-center justify-center text-sm shadow shrink-0">
+                            4
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="text-[9px] font-bold text-[#2563EB] uppercase block leading-none">Quest 4 • +50 XP</span>
+                            <h3 class="text-xs font-bold text-[#1E3A8A] truncate">Penerapan Budi Pekerti</h3>
+                        </div>
+                    </div>
+                    <button onclick="openSubtopicReader('penerapan')" class="px-3 py-1.5 rounded-lg bg-[#2563EB] text-white font-bold text-[11px] shadow shrink-0">
+                        Mulai
+                    </button>
+                </div>
+
+                <!-- Boss Node Kuis -->
+                <div class="flex items-center justify-between gap-2 bg-amber-50 p-3 rounded-xl border-2 border-amber-300">
+                    <div class="flex items-center gap-2.5 overflow-hidden">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-extrabold flex items-center justify-center text-sm shadow shrink-0">
+                            🏆
+                        </div>
+                        <div class="overflow-hidden">
+                            <span class="text-[9px] font-bold text-amber-700 uppercase block leading-none">Evaluasi Akhir • +200 XP MAX</span>
+                            <h3 class="text-xs font-bold text-amber-950 truncate">Kuis Master Darsana</h3>
+                        </div>
+                    </div>
+                    <button onclick="navigateTo('kuis')" class="px-3 py-1.5 rounded-lg bg-amber-600 text-white font-bold text-[11px] shadow shrink-0">
+                        Tantang
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VIEW 5: MATERI PEMBELAJARAN (CONCISE & MOBILE FRIENDLY) -->
+        <section id="sec-materi" class="view-panel hidden space-y-3">
+            
+            <div id="materi-selector-box" class="space-y-3">
+                <div class="bg-white p-3 rounded-2xl border border-blue-100 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-[9px] font-bold text-[#2563EB] uppercase block leading-none">Modul Kelas XI</span>
+                        <h2 class="text-sm font-extrabold text-[#1E3A8A]">📚 Pilih Subbab Materi</h2>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    
+                    <div onclick="openSubtopicReader('pengertian')" class="bg-white p-3.5 rounded-xl border border-blue-100 hover:border-[#2563EB] shadow-sm transition cursor-pointer space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl">📜</span>
+                            <span id="badge-topic-pengertian" class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Belum dipelajari</span>
+                        </div>
+                        <h3 class="font-bold text-[#1E3A8A] text-xs">1. Pengertian Darsana & Astika-Nastika</h3>
+                        <p class="text-[10px] text-slate-500 leading-relaxed">Etimologi, hakikat kebenaran, & pengelompokan filsafat.</p>
+                    </div>
+
+                    <div onclick="openSubtopicReader('saddarsana')" class="bg-white p-3.5 rounded-xl border border-blue-100 hover:border-[#2563EB] shadow-sm transition cursor-pointer space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl">🏛️</span>
+                            <span id="badge-topic-saddarsana" class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Belum dipelajari</span>
+                        </div>
+                        <h3 class="font-bold text-[#1E3A8A] text-xs">2. Enam Aliran Sad Darsana</h3>
+                        <p class="text-[10px] text-slate-500 leading-relaxed">Nyaya, Vaisheshika, Samkhya, Yoga, Mimamsa, Vedanta.</p>
+                    </div>
+
+                    <div onclick="openSubtopicReader('komparasi')" class="bg-white p-3.5 rounded-xl border border-blue-100 hover:border-[#2563EB] shadow-sm transition cursor-pointer space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl">📊</span>
+                            <span id="badge-topic-komparasi" class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Belum dipelajari</span>
+                        </div>
+                        <h3 class="font-bold text-[#1E3A8A] text-xs">3. Tabel Komparasi Aliran</h3>
+                        <p class="text-[10px] text-slate-500 leading-relaxed">Matriks perbandingan pendiri, Pramāna, & tujuan.</p>
+                    </div>
+
+                    <div onclick="openSubtopicReader('penerapan')" class="bg-white p-3.5 rounded-xl border border-blue-100 hover:border-[#2563EB] shadow-sm transition cursor-pointer space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl">🌱</span>
+                            <span id="badge-topic-penerapan" class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Belum dipelajari</span>
+                        </div>
+                        <h3 class="font-bold text-[#1E3A8A] text-xs">4. Penerapan Budi Pekerti</h3>
+                        <p class="text-[10px] text-slate-500 leading-relaxed">Berpikir kritis Nyaya, disiplin Yoga, & Tri Guna.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Single Subtopic Reader View -->
+            <div id="materi-reader-box" class="hidden space-y-3">
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm flex items-center justify-between gap-2">
+                    <button onclick="closeSubtopicReader()" class="px-2.5 py-1 rounded-lg bg-[#EFF6FF] text-[#2563EB] font-bold text-xs flex items-center gap-1">
+                        📚 <span>Kembali</span>
+                    </button>
+                    <span id="reader-topic-status" class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                        Belum dipelajari
+                    </span>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-blue-100 p-4 shadow-sm space-y-4">
+                    
+                    <div id="reader-content-body">
+                        <!-- Dynamic HTML Content Injected via JS -->
+                    </div>
+
+                    <div class="pt-3 border-t border-blue-100 space-y-2">
+                        <button onclick="toggleMarkTopicComplete()" id="btn-mark-complete" class="w-full py-2 rounded-xl bg-[#EFF6FF] border border-blue-200 text-[#2563EB] hover:bg-blue-100 font-bold text-xs transition flex items-center justify-center gap-1">
+                            <span>✅ Tandai Bagian Ini Selesai (+50 XP)</span>
+                        </button>
+                        
+                        <div class="flex justify-between items-center gap-2 pt-1">
+                            <button onclick="navigateTopicPrev()" id="btn-topic-prev" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600 disabled:opacity-40" disabled>
+                                ← Sebelumnya
+                            </button>
+                            
+                            <button onclick="navigateTopicNext()" id="btn-topic-next" class="px-3 py-1.5 rounded-lg bg-gradient-darsana text-white font-bold text-xs shadow disabled:opacity-40" disabled>
+                                Selanjutnya →
+                            </button>
+
+                            <button onclick="handleNavClick('dashboard')" id="btn-last-home" class="hidden px-3 py-1.5 rounded-lg bg-white border border-blue-300 text-[#1E3A8A] font-bold text-xs flex items-center gap-1">
+                                🏠 <span>Beranda</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- VIEW 6: PETA KONSEP INTERAKTIF -->
+        <section id="sec-mindmap" class="view-panel hidden space-y-3">
+            <div class="bg-white p-3 rounded-2xl border border-blue-100 shadow-sm flex items-center justify-between">
+                <div>
+                    <h2 class="text-sm font-extrabold text-[#1E3A8A] flex items-center gap-1.5">
+                        🧠 Mind Map Sad Darsana
+                    </h2>
+                    <p class="text-[10px] text-slate-500">Sentuh simpul di bawah untuk melihat intisari (+20 XP)!</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-blue-100 p-4 shadow-sm space-y-4">
+                
+                <div class="flex justify-center">
+                    <div onclick="selectMindNode('core')" class="mindmap-node cursor-pointer bg-gradient-darsana text-white px-4 py-2 rounded-xl text-center shadow border border-blue-200 max-w-xs">
+                        <span class="text-[8px] font-bold uppercase text-blue-200 block leading-none">Konsep Utama</span>
+                        <h3 class="text-xs sm:text-sm font-extrabold text-white">SAD DARSANA 🧠</h3>
+                    </div>
+                </div>
+
+                <!-- Grid Node Aliran -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                    
+                    <div onclick="selectMindNode('nyaya')" id="mnode-nyaya" class="mindmap-node cursor-pointer bg-[#EFF6FF] border border-blue-200 rounded-xl p-2 text-center space-y-0.5">
+                        <span class="text-base block">🔍</span>
+                        <h4 class="font-bold text-[#1E3A8A] text-[11px]">Nyaya</h4>
+                        <p class="text-[9px] text-slate-500">Rsi Gautama</p>
+                    </div>
+
+                    <div onclick="selectMindNode('vaisheshika')" id="mnode-vaisheshika" class="mindmap-node cursor-pointer bg-[#EFF6FF] border border-blue-200 rounded-xl p-2 text-center space-y-0.5">
+                        <span class="text-base block">⚛️</span>
+                        <h4 class="font-bold text-[#1E3A8A] text-[11px]">Vaisheshika</h4>
+                        <p class="text-[9px] text-slate-500">Rsi Kanada</p>
+                    </div>
+
+                    <div onclick="selectMindNode('samkhya')" id="mnode-samkhya" class="mindmap-node cursor-pointer bg-[#EFF6FF] border border-blue-200 rounded-xl p-2 text-center space-y-0.5">
+                        <span class="text-base block">☯️</span>
+                        <h4 class="font-bold text-[#1E3A8A] text-[11px]">Samkhya</h4>
+                        <p class="text-[9px] text-slate-500">Rsi Kapila</p>
+                    </div>
+
+                    <div onclick="selectMindNode('yoga')" id="mnode-yoga" class="mindmap-node cursor-pointer bg-[#EFF6FF] border border-blue-200 rounded-xl p-2 text-center space-y-0.5">
+                        <span class="text-base block">🧘</span>
+                        <h4 class="font-bold text-[#1E3A8A] text-[11px]">Yoga</h4>
+                        <p class="text-[9px] text-slate-500">Rsi Patanjali</p>
+                    </div>
+
+                    <div onclick="selectMindNode('mimamsa')" id="mnode-mimamsa" class="mindmap-node cursor-pointer bg-[#EFF6FF] border border-blue-200 rounded-xl p-2 text-center space-y-0.5">
+                        <span class="text-base block">🔥</span>
+                        <h4 class="font-bold text-[#1E3A8A] text-[11px]">Mimamsa</h4>
+                        <p class="text-[9px] text-slate-500">Rsi Jaimini</p>
+                    </div>
+
+                    <div onclick="selectMindNode('vedanta')" id="mnode-vedanta" class="mindmap-node cursor-pointer bg-[#EFF6FF] border border-blue-200 rounded-xl p-2 text-center space-y-0.5">
+                        <span class="text-base block">✨</span>
+                        <h4 class="font-bold text-[#1E3A8A] text-[11px]">Vedanta</h4>
+                        <p class="text-[9px] text-slate-500">Rsi Badarayana</p>
+                    </div>
+
+                </div>
+
+                <!-- Detail Panel Card -->
+                <div id="mind-detail-card" class="bg-blue-50 border border-blue-200 rounded-xl p-3 space-y-1.5">
+                    <div class="flex items-center gap-1.5">
+                        <span id="mind-detail-icon" class="text-lg">💡</span>
+                        <h4 id="mind-detail-title" class="text-xs font-bold text-[#1E3A8A]">
+                            Petunjuk: Sentuh salah satu simpul aliran di atas!
+                        </h4>
+                    </div>
+                    <p id="mind-detail-desc" class="text-[11px] text-slate-600 leading-snug">
+                        Peta konsep ini menampilkan 6 aliran ortodoks Hindu (Sad Darsana). Sentuh cabang manapun untuk melihat ringkasan singkat.
+                    </p>
+                    <div id="mind-detail-extra" class="hidden pt-1.5 border-t border-blue-200 text-[11px] text-slate-700">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VIEW 7: LATIHAN SOAL EVALUASI -->
+        <section id="sec-kuis" class="view-panel hidden space-y-3 max-w-lg mx-auto">
+            
+            <div id="quiz-start-box" class="bg-white rounded-2xl border border-blue-100 p-5 shadow-sm text-center space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-2xl mx-auto">
+                    📝
+                </div>
+                <div class="space-y-0.5">
+                    <h2 class="text-base font-extrabold text-[#1E3A8A]">Kuis Master Darsana</h2>
+                    <p class="text-[11px] text-slate-500">
+                        10 Soal pilihan ganda interaktif. Dapatkan +10 XP tiap jawaban benar!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
+                    <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+                        <span class="block text-slate-400 font-bold uppercase">Soal</span>
+                        <span class="font-extrabold text-[#1E3A8A]">10</span>
+                    </div>
+                    <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+                        <span class="block text-slate-400 font-bold uppercase">Bonus XP</span>
+                        <span class="font-extrabold text-[#2563EB]">+200 MAX</span>
+                    </div>
+                    <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+                        <span class="block text-slate-400 font-bold uppercase">Umpan Balik</span>
+                        <span class="font-extrabold text-[#2563EB]">Langsung</span>
+                    </div>
+                </div>
+
+                <button onclick="startQuizEngine()" class="w-full bg-gradient-darsana text-white font-bold py-2.5 px-4 rounded-xl shadow transition text-xs flex items-center justify-center gap-1.5">
+                    <span>🚀 Mulai Kuis Evaluasi</span>
+                </button>
+            </div>
+
+            <!-- Active Question Card -->
+            <div id="quiz-active-box" class="hidden space-y-3">
+                <div class="bg-white rounded-xl border border-blue-100 p-3 shadow-sm flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-[#2563EB]">Soal <span id="q-curr-num">1</span> dari <span id="q-total-num">10</span></span>
+                        <h3 id="q-topic-tag" class="text-[9px] font-semibold text-slate-400">Materi Darsana</h3>
+                    </div>
+                    <div class="w-20 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                        <div id="q-progress-bar" class="bg-gradient-darsana h-1.5 rounded-full transition-all duration-300" style="width: 10%"></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-blue-100 p-4 shadow-sm space-y-3">
+                    <p id="q-question-text" class="text-xs sm:text-sm font-bold text-[#1E3A8A] leading-relaxed">
+                        Loading soal...
+                    </p>
+
+                    <div id="q-options-container" class="space-y-2">
+                    </div>
+
+                    <div id="q-feedback-box" class="hidden p-3 rounded-xl text-xs space-y-0.5">
+                        <p id="q-feedback-title" class="font-bold flex items-center gap-1"></p>
+                        <p id="q-feedback-desc" class="text-[11px] text-slate-700 leading-snug"></p>
+                    </div>
+
+                    <div class="pt-2 border-t border-blue-100 flex justify-between items-center">
+                        <span id="q-status-text" class="text-[9px] text-slate-400">Pilih salah satu jawaban</span>
+                        <div class="flex gap-1.5">
+                            <button onclick="checkSelectedAnswer()" id="q-check-btn" disabled class="bg-[#2563EB] disabled:opacity-40 text-white font-bold px-3 py-1.5 rounded-lg text-xs">
+                                Periksa
+                            </button>
+                            <button onclick="nextQuestion()" id="q-next-btn" class="hidden bg-gradient-darsana text-white font-bold px-3 py-1.5 rounded-lg text-xs">
+                                Selanjutnya →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Result View -->
+            <div id="quiz-result-box" class="hidden bg-white rounded-2xl border border-blue-100 p-5 shadow-sm text-center space-y-3">
+                <div class="w-12 h-12 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center text-2xl mx-auto">
+                    🏆
+                </div>
+
+                <div class="space-y-0.5">
+                    <h2 class="text-base font-extrabold text-[#1E3A8A]">Hasil Evaluasi</h2>
+                    <p id="result-student-name" class="text-[11px] text-slate-500">Nama Siswa</p>
+                </div>
+
+                <div class="p-3 bg-[#EFF6FF] border border-blue-200 rounded-xl space-y-0.5">
+                    <span class="text-[9px] font-bold text-[#2563EB] uppercase block">Skor Akhir</span>
+                    <div id="result-score-val" class="text-2xl font-extrabold text-[#1E3A8A]">0</div>
+                    <p id="result-correct-count-text" class="text-[11px] font-semibold text-slate-600">Jawaban Benar: 0 dari 10</p>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-left space-y-1">
+                    <span class="font-bold text-amber-900 text-xs flex items-center gap-1">💡 Rekomendasi Belajar:</span>
+                    <p id="result-review-hint" class="text-[11px] text-amber-800 leading-snug">
+                        Pelajari kembali materi Sad Darsana.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-1.5">
+                    <button onclick="startQuizEngine()" class="bg-gradient-darsana text-white font-bold py-2 px-3 rounded-lg text-xs">
+                        🔄 Ulangi
+                    </button>
+                    <button onclick="navigateTo('profil')" class="bg-amber-500 text-white font-bold py-2 px-3 rounded-lg text-xs">
+                        📜 Cetak Sertifikat
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- VIEW 8: PROFIL, BADGES, DAN SERTIFIKAT -->
+        <section id="sec-profil" class="view-panel hidden space-y-3">
+            <div class="bg-white p-3.5 rounded-2xl border border-blue-100 shadow-sm flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                    <div id="profile-big-avatar" class="w-10 h-10 rounded-xl bg-gradient-darsana text-white flex items-center justify-center text-lg font-bold shrink-0">
+                        ?
+                    </div>
+                    <div class="overflow-hidden">
+                        <h2 id="profile-student-name" class="text-xs sm:text-sm font-extrabold text-[#1E3A8A] truncate">Belum Terdaftar</h2>
+                        <p id="profile-student-sub" class="text-[10px] text-slate-500 truncate">Kelas: - | Absen: -</p>
+                    </div>
+                </div>
+                <button onclick="openEditIdentityModal()" class="px-2.5 py-1 rounded-lg bg-[#EFF6FF] text-[#2563EB] font-bold text-[10px] border border-blue-200 shrink-0">
+                    ✏️ Edit
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                    <span class="text-[8px] font-bold text-slate-400 uppercase block">Level</span>
+                    <div id="prof-lvl-num" class="text-base font-extrabold text-[#1E3A8A]">Lvl 1</div>
+                    <p id="prof-lvl-title" class="text-[9px] text-[#2563EB] font-semibold truncate">Siswa Jñana</p>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                    <span class="text-[8px] font-bold text-slate-400 uppercase block">Total XP</span>
+                    <div id="prof-xp-val" class="text-base font-extrabold text-amber-500">0 XP</div>
+                    <p class="text-[9px] text-slate-400">Poin</p>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                    <span class="text-[8px] font-bold text-slate-400 uppercase block">Lencana</span>
+                    <div id="prof-badge-count" class="text-base font-extrabold text-emerald-600">1 / 6</div>
+                    <p class="text-[9px] text-slate-400">Terbuka</p>
+                </div>
+
+                <div class="bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                    <span class="text-[8px] font-bold text-slate-400 uppercase block">Skor Kuis</span>
+                    <div id="prof-quiz-best" class="text-base font-extrabold text-[#2563EB]">0</div>
+                    <p class="text-[9px] text-slate-400">Evaluasi</p>
+                </div>
+            </div>
+
+            <!-- Badges Grid -->
+            <div class="bg-white rounded-2xl border border-blue-100 p-3.5 shadow-sm space-y-2">
+                <h3 class="text-xs font-bold text-[#1E3A8A]">
+                    🎖️ Koleksi Lencana (Badges)
+                </h3>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-left">
+                    <div id="badge-card-pencari" class="p-2 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-2">
+                        <span class="text-lg">🎓</span>
+                        <div>
+                            <h4 class="text-[10px] font-bold text-[#1E3A8A]">Pencari Kebenaran</h4>
+                            <span id="badge-status-pencari" class="text-[8px] font-bold text-emerald-600 block">Terbuka ✅</span>
+                        </div>
+                    </div>
+
+                    <div id="badge-card-astika" class="p-2 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-2 opacity-50">
+                        <span class="text-lg">📜</span>
+                        <div>
+                            <h4 class="text-[10px] font-bold text-[#1E3A8A]">Paham Astika</h4>
+                            <span id="badge-status-astika" class="text-[8px] font-bold text-slate-400 block">Terkunci 🔒</span>
+                        </div>
+                    </div>
+
+                    <div id="badge-card-saddarsana" class="p-2 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-2 opacity-50">
+                        <span class="text-lg">🧠</span>
+                        <div>
+                            <h4 class="text-[10px] font-bold text-[#1E3A8A]">Ahli Sad Darsana</h4>
+                            <span id="badge-status-saddarsana" class="text-[8px] font-bold text-slate-400 block">Terkunci 🔒</span>
+                        </div>
+                    </div>
+
+                    <div id="badge-card-budi" class="p-2 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-2 opacity-50">
+                        <span class="text-lg">🧘</span>
+                        <div>
+                            <h4 class="text-[10px] font-bold text-[#1E3A8A]">Pengendali Diri</h4>
+                            <span id="badge-status-budi" class="text-[8px] font-bold text-slate-400 block">Terkunci 🔒</span>
+                        </div>
+                    </div>
+
+                    <div id="badge-card-peta" class="p-2 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-2 opacity-50">
+                        <span class="text-lg">🗺️</span>
+                        <div>
+                            <h4 class="text-[10px] font-bold text-[#1E3A8A]">Penjelajah Peta</h4>
+                            <span id="badge-status-peta" class="text-[8px] font-bold text-slate-400 block">Terkunci 🔒</span>
+                        </div>
+                    </div>
+
+                    <div id="badge-card-master" class="p-2 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-2 opacity-50">
+                        <span class="text-lg">🏆</span>
+                        <div>
+                            <h4 class="text-[10px] font-bold text-[#1E3A8A]">Master Darsana</h4>
+                            <span id="badge-status-master" class="text-[8px] font-bold text-slate-400 block">Terkunci 🔒</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Digital Certificate Box -->
+            <div class="bg-gradient-darsana text-white p-4 rounded-2xl shadow space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                    <div>
+                        <h3 class="text-xs sm:text-sm font-extrabold text-white">Sertifikat Kelulusan</h3>
+                        <p class="text-[10px] text-blue-100">Selesaikan 4 subbab & kuis evaluasi untuk mencetak sertifikat digital.</p>
+                    </div>
+                    <button onclick="checkAndOpenCertificate()" class="px-3 py-1.5 rounded-lg bg-white text-[#1E3A8A] font-bold text-xs shadow shrink-0">
+                        📜 Cetak
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 9: GLOSARIUM & REFLEKSI -->
+        <section id="sec-ringkasan" class="view-panel hidden space-y-3">
+            <div class="bg-white p-4 rounded-2xl border border-blue-100 shadow-sm space-y-3">
+                <div class="border-b border-blue-100 pb-2">
+                    <h2 class="text-sm font-extrabold text-[#1E3A8A]">💡 Glosarium & Intisari Darsana</h2>
+                </div>
+
+                <div class="space-y-1.5 text-xs text-slate-700">
+                    <h3 class="font-bold text-[#1E3A8A] uppercase text-[10px]">📌 Rangkuman Utama:</h3>
+                    <ul class="list-disc pl-4 space-y-1 text-[11px]">
+                        <li><strong>Darsana</strong>: Pandangan filsafat Hindu untuk mencari kebenaran & mencapai Moksha.</li>
+                        <li><strong>Astika</strong>: Aliran yang mengakui otoritas suci Veda (Sad Darsana).</li>
+                        <li><strong>Nastika</strong>: Aliran yang tidak mengakui otoritas Veda (Carvaka, Jaina, Buddha).</li>
+                        <li><strong>Pramāna</strong>: Cara pembuktian kebenaran yang valid (Pratyaksa, Anumana, Upamana, Sabda).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl space-y-1">
+                    <h4 class="font-bold text-amber-900 text-xs">🙏 Refleksi Budi Pekerti</h4>
+                    <p class="text-[11px] text-amber-800 italic leading-snug">
+                        "Memahami Darsana melatih kita menjadi pribadi bijaksana yang mengedepankan logika, disiplin diri, serta saling menghargai keberagaman sudut pandang."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL EDIT IDENTITAS -->
+    <div id="modal-identity" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-xl relative">
+            <button onclick="closeEditIdentityModal()" class="absolute top-3 right-3 text-slate-400 font-bold text-sm">
+                ✕
+            </button>
+            
+            <div class="text-center space-y-0.5">
+                <h3 class="text-xs font-bold text-[#1E3A8A]">Edit Identitas Siswa</h3>
+                <p class="text-[10px] text-slate-500">Perbarui nama, nomor absen, dan kelas Anda.</p>
+            </div>
+
+            <form onsubmit="saveEditIdentitas(event)" class="space-y-2.5 text-xs">
+                <div>
+                    <label for="edit-nama" class="block font-bold text-[#1E3A8A] text-[10px] uppercase mb-0.5">Nama Lengkap</label>
+                    <input type="text" id="edit-nama" required placeholder="Ketik nama lengkap" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label for="edit-absen" class="block font-bold text-[#1E3A8A] text-[10px] uppercase mb-0.5">Nomor Absen</label>
+                        <input type="text" id="edit-absen" required placeholder="Ketik nomor absen" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs">
+                    </div>
+                    <div>
+                        <label for="edit-kelas" class="block font-bold text-[#1E3A8A] text-[10px] uppercase mb-0.5">Kelas</label>
+                        <input type="text" id="edit-kelas" required placeholder="Ketik kelas" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs">
+                    </div>
+                </div>
+
+                <div class="pt-1 flex justify-end gap-1.5">
+                    <button type="button" onclick="closeEditIdentityModal()" class="px-3 py-1 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-3.5 py-1 rounded-lg bg-gradient-darsana text-white text-xs font-bold shadow">
+                        Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL SERTIFIKAT DIGITAL -->
+    <div id="modal-certificate" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-4 sm:p-6 space-y-4 shadow-2xl relative border-2 border-blue-200 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeCertificateModal()" class="absolute top-3 right-3 text-slate-400 font-bold text-sm">
+                ✕
+            </button>
+
+            <div id="printable-certificate" class="p-4 bg-gradient-to-b from-blue-50 to-white rounded-xl border border-blue-300 text-center space-y-3 relative">
+                <div class="flex justify-between items-center border-b border-blue-200 pb-2 text-[10px]">
+                    <span class="font-bold text-[#2563EB]">🕉️ MPI DARSANA QUEST</span>
+                    <span id="cert-code" class="font-mono text-slate-400">CERT-DARSANA-2026</span>
+                </div>
+
+                <div class="space-y-0.5">
+                    <span class="text-[9px] uppercase tracking-widest text-blue-600 font-bold">Sertifikat Kelulusan Digital</span>
+                    <h2 class="text-base sm:text-lg font-extrabold text-[#1E3A8A]">DARSANA FILSAFAT HINDU</h2>
+                    <p class="text-[10px] text-slate-500">Agama Hindu & Budi Pekerti Kelas XI SMA</p>
+                </div>
+
+                <p class="text-[10px] text-slate-600 italic">Diberikan secara terhormat kepada:</p>
+
+                <div class="space-y-0.5">
+                    <h3 id="cert-student-name" class="text-sm sm:text-base font-extrabold text-[#2563EB] uppercase underline decoration-2 decoration-blue-300">
+                        NAMA SISWA
+                    </h3>
+                    <p id="cert-student-class" class="text-[11px] font-semibold text-slate-700">Kelas XI SMA • Absen -</p>
+                </div>
+
+                <p class="text-[10px] text-slate-600 leading-snug">
+                    Telah berhasil menyelesaikan seluruh modul pembelajaran, eksplorasi Peta Quest, dan kuis evaluasi Darsana.
+                </p>
+
+                <div class="grid grid-cols-2 gap-2 max-w-xs mx-auto text-center pt-1">
+                    <div class="bg-white p-2 rounded-lg border border-blue-100">
+                        <span class="block text-[8px] text-slate-400 font-bold uppercase">Level</span>
+                        <span id="cert-lvl" class="font-bold text-[#1E3A8A] text-xs">Level 4</span>
+                    </div>
+                    <div class="bg-white p-2 rounded-lg border border-blue-100">
+                        <span class="block text-[8px] text-slate-400 font-bold uppercase">Skor Kuis</span>
+                        <span id="cert-score" class="font-bold text-emerald-600 text-xs">100 / 100</span>
+                    </div>
+                </div>
+
+                <div class="pt-2 border-t border-blue-100 flex justify-between items-end text-[9px] text-slate-400">
+                    <div>
+                        <span>Terbit: </span>
+                        <strong id="cert-date" class="text-slate-600">9 Oktober 2026</strong>
+                    </div>
+                    <div class="text-right">
+                        <span class="block font-bold text-[#1E3A8A]">MPI Agama Hindu SMA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-1.5">
+                <button onclick="window.print()" class="px-4 py-1.5 rounded-lg bg-[#2563EB] text-white text-xs font-bold shadow flex items-center gap-1">
+                    🖨️ <span>Cetak / PDF</span>
+                </button>
+                <button onclick="closeCertificateModal()" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white border-t border-blue-100 py-2.5 mt-4">
+        <div class="max-w-7xl mx-auto px-3 text-center space-y-0.5">
+            <p class="text-[10px] text-slate-500 font-semibold">
+                © 2026 MPI Darsana Quest — Agama Hindu Kelas XI SMA
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const STORAGE_KEY = 'MPI_DARSANA_QUEST_XI_V5';
+
+        // Core Application State
+        let appData = {
+            student: {
+                nama: '',
+                absen: '',
+                kelas: '',
+                isRegistered: false
+            },
+            completedSubtopics: {
+                pengertian: false,
+                saddarsana: false,
+                komparasi: false,
+                penerapan: false
+            },
+            exploredMindNodes: {
+                nyaya: false,
+                vaisheshika: false,
+                samkhya: false,
+                yoga: false,
+                mimamsa: false,
+                vedanta: false
+            },
+            lastActiveTopic: 'pengertian',
+            xp: 0,
+            level: 1,
+            badges: {
+                pencari: true,
+                astika: false,
+                saddarsana: false,
+                budi: false,
+                peta: false,
+                master: false
+            },
+            quiz: {
+                score: null,
+                correctCount: 0,
+                isCompleted: false
+            }
+        };
+
+        // Concise Content Dataset Optimized for Mobile
+        const subtopicContent = {
+            'pengertian': `
+                <div class="space-y-3 text-xs text-slate-700 leading-relaxed">
+                    <div class="border-b border-blue-100 pb-1.5">
+                        <span class="text-[9px] font-bold text-[#2563EB] uppercase block">Subbab 1</span>
+                        <h3 class="text-sm font-bold text-[#1E3A8A]">A. Pengertian Darsana & Astika-Nastika</h3>
+                    </div>
+                    
+                    <p>
+                        Kata <strong>Darsana</strong> berasal dari akar kata Sansekerta <em>"Drś"</em> yang berarti "melihat", "memandang", atau "mengalami kebenaran". Darsana adalah pandangan filsafat untuk memahami hakikat Tuhan, alam semesta, dan Atman demi mencapai <strong>Moksha</strong>.
+                    </p>
+
+                    <div class="bg-[#EFF6FF] border-l-3 border-[#2563EB] p-2.5 rounded-r-xl my-1.5">
+                        <span class="font-bold text-[#1E3A8A] text-[10px] uppercase block">💡 Dua Kelompok Utama Filsafat India:</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="p-2.5 rounded-xl bg-blue-50 border border-blue-200 space-y-0.5">
+                            <span class="px-1.5 py-0.5 rounded bg-[#2563EB] text-white text-[8px] font-bold uppercase">1. Kelompok Astika</span>
+                            <h5 class="font-bold text-[#1E3A8A] text-[11px]">Ortodoks (Menerima Veda)</h5>
+                            <p class="text-[10px] text-slate-600">
+                                Kelompok yang <strong>mengakui wahyu Veda</strong>. Enam aliran utamanya disebut <strong>Sad Darsana</strong>.
+                            </p>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 space-y-0.5">
+                            <span class="px-1.5 py-0.5 rounded bg-slate-600 text-white text-[8px] font-bold uppercase">2. Kelompok Nastika</span>
+                            <h5 class="font-bold text-slate-800 text-[11px]">Heterodoks (Menolak Veda)</h5>
+                            <p class="text-[10px] text-slate-600">
+                                Kelompok yang <strong>tidak mengakui otoritas Veda</strong> (Contoh: Carvaka, Jaina, Buddha).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            'saddarsana': `
+                <div class="space-y-3 text-xs text-slate-700 leading-relaxed">
+                    <div class="border-b border-blue-100 pb-1.5">
+                        <span class="text-[9px] font-bold text-[#2563EB] uppercase block">Subbab 2</span>
+                        <h3 class="text-sm font-bold text-[#1E3A8A]">B. Enam Aliran Sad Darsana</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="p-2.5 rounded-xl bg-[#EFF6FF] border border-blue-200 space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-[11px] text-[#2563EB]">1. Nyaya</span>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-200 font-semibold">Rsi Gautama</span>
+                            </div>
+                            <p class="text-[10px] text-slate-600">Filsafat logika & epistemologi (4 Pramāna: Pratyaksa, Anumana, Upamana, Sabda).</p>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-[#EFF6FF] border border-blue-200 space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-[11px] text-[#2563EB]">2. Vaisheshika</span>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-200 font-semibold">Rsi Kanada</span>
+                            </div>
+                            <p class="text-[10px] text-slate-600">Filsafat atomisme fisik (Paramanu/Atom) & 7 Kategori Padartha.</p>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-[#EFF6FF] border border-blue-200 space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-[11px] text-[#2563EB]">3. Samkhya</span>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-200 font-semibold">Rsi Kapila</span>
+                            </div>
+                            <p class="text-[10px] text-slate-600">Dualisme metafisika: Purusha (Kesadaran) & Prakriti (Materi, Tri Guna).</p>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-[#EFF6FF] border border-blue-200 space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-[11px] text-[#2563EB]">4. Yoga</span>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-200 font-semibold">Rsi Patanjali</span>
+                            </div>
+                            <p class="text-[10px] text-slate-600">Praktik pengendalian gelombang pikiran (Astanga Yoga) menuju Samadhi.</p>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-[#EFF6FF] border border-blue-200 space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-[11px] text-[#2563EB]">5. Mimamsa</span>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-200 font-semibold">Rsi Jaimini</span>
+                            </div>
+                            <p class="text-[10px] text-slate-600">Penafsiran ritual Yajna & kewajiban Karma-kanda Veda.</p>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-[#EFF6FF] border border-blue-200 space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-[11px] text-[#2563EB]">6. Vedanta</span>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-200 font-semibold">Rsi Badarayana</span>
+                            </div>
+                            <p class="text-[10px] text-slate-600">Pencerahan Upanishad (Jnana-kanda) tentang Brahman & Atman.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            'komparasi': `
+                <div class="space-y-3 text-xs text-slate-700 leading-relaxed">
+                    <div class="border-b border-blue-100 pb-1.5">
+                        <span class="text-[9px] font-bold text-[#2563EB] uppercase block">Subbab 3</span>
+                        <h3 class="text-sm font-bold text-[#1E3A8A]">C. Tabel Komparasi Aliran</h3>
+                    </div>
+
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-left text-[10px] border-collapse min-w-[320px]">
+                            <thead>
+                                <tr class="bg-[#EFF6FF] text-[#1E3A8A] font-bold border-b border-blue-200">
+                                    <th class="p-1.5">Aliran</th>
+                                    <th class="p-1.5">Pendiri</th>
+                                    <th class="p-1.5">Fokus Utama</th>
+                                    <th class="p-1.5">Tujuan</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-1.5 font-bold text-[#2563EB]">Nyaya</td>
+                                    <td class="p-1.5">Rsi Gautama</td>
+                                    <td class="p-1.5">Logika & Epistemologi</td>
+                                    <td class="p-1.5">Bebas dari kebodohan</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1.5 font-bold text-[#2563EB]">Vaisheshika</td>
+                                    <td class="p-1.5">Rsi Kanada</td>
+                                    <td class="p-1.5">Paramanu (Atom)</td>
+                                    <td class="p-1.5">Paham realitas fisik</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1.5 font-bold text-[#2563EB]">Samkhya</td>
+                                    <td class="p-1.5">Rsi Kapila</td>
+                                    <td class="p-1.5">Purusha-Prakriti</td>
+                                    <td class="p-1.5">Pemisahan materi</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1.5 font-bold text-[#2563EB]">Yoga</td>
+                                    <td class="p-1.5">Rsi Patanjali</td>
+                                    <td class="p-1.5">Astanga Yoga</td>
+                                    <td class="p-1.5">Samadhi</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1.5 font-bold text-[#2563EB]">Mimamsa</td>
+                                    <td class="p-1.5">Rsi Jaimini</td>
+                                    <td class="p-1.5">Ritual Yajna</td>
+                                    <td class="p-1.5">Harmoni Dharma</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1.5 font-bold text-[#2563EB]">Vedanta</td>
+                                    <td class="p-1.5">Rsi Badarayana</td>
+                                    <td class="p-1.5">Brahman & Atman</td>
+                                    <td class="p-1.5">Moksha</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `,
+
+            'penerapan': `
+                <div class="space-y-3 text-xs text-slate-700 leading-relaxed">
+                    <div class="border-b border-blue-100 pb-1.5">
+                        <span class="text-[9px] font-bold text-[#2563EB] uppercase block">Subbab 4</span>
+                        <h3 class="text-sm font-bold text-[#1E3A8A]">D. Penerapan Budi Pekerti Siswa</h3>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-2">
+                            <span class="text-lg">🔍</span>
+                            <div>
+                                <h4 class="font-bold text-[#1E3A8A] text-[11px]">Nyaya: Berpikir Kritis</h4>
+                                <p class="text-[10px] text-slate-600">Siswa meneliti kebenaran berita hoax dengan pengamatan (Pratyaksa) dan logika (Anumana).</p>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-2">
+                            <span class="text-lg">🧘</span>
+                            <div>
+                                <h4 class="font-bold text-[#1E3A8A] text-[11px]">Yoga: Pengendalian Stres</h4>
+                                <p class="text-[10px] text-slate-600">Melatih pernapasan (Pranayama) dan konsentrasi (Dharana) sebelum ujian.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-2">
+                            <span class="text-lg">🌱</span>
+                            <div>
+                                <h4 class="font-bold text-[#1E3A8A] text-[11px]">Samkhya: Kontrol Tri Guna</h4>
+                                <p class="text-[10px] text-slate-600">Memupuk sifat Sattvam (rajin, jujur) serta menekan Rajas (emosi) & Tamas (malas).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        const quizDataset = [
+            {
+                id: 1,
+                topic: "Pengertian Darsana",
+                question: "Etimologi kata 'Darsana' berasal dari akar kata Sansekerta 'Drś' yang bermakna...",
+                options: [
+                    "A. Mendengar suara gaib",
+                    "B. Melihat atau mengalami kebenaran",
+                    "C. Mengafal sloka suci",
+                    "D. Mengatur tata cara ritual"
+                ],
+                answer: 1,
+                explanation: "Drś berarti melihat atau memandang kebenaran filsafat secara langsung."
+            },
+            {
+                id: 2,
+                topic: "Klasifikasi Filsafat",
+                question: "Kelompok filsafat Hindu yang menerima otoritas wahyu Veda disebut...",
+                options: [
+                    "A. Nastika",
+                    "B. Astika",
+                    "C. Carvaka",
+                    "D. Bauddha"
+                ],
+                answer: 1,
+                explanation: "Astika adalah aliran ortodoks yang mengakui keshahihan Veda."
+            },
+            {
+                id: 3,
+                topic: "Nyaya Darsana",
+                question: "Tokoh Rsi pendiri aliran Nyaya Darsana yang menekankan logika ilmiah adalah...",
+                options: [
+                    "A. Rsi Gautama",
+                    "B. Rsi Kanada",
+                    "C. Rsi Kapila",
+                    "D. Rsi Patanjali"
+                ],
+                answer: 0,
+                explanation: "Nyaya Darsana didirikan oleh Rsi Gautama yang berfokus pada ilmu logika."
+            },
+            {
+                id: 4,
+                topic: "Vaisheshika Darsana",
+                question: "Vaisheshika yang dikembangkan Rsi Kanada mengajarkan bahwa materi terdiri dari partikel terkecil bernama...",
+                options: [
+                    "A. Purusha",
+                    "B. Paramanu (Atom)",
+                    "C. Prakriti",
+                    "D. Maya"
+                ],
+                answer: 1,
+                explanation: "Rsi Kanada menguraikan keberadaan atom penyusun alam fisik (Paramanu)."
+            },
+            {
+                id: 5,
+                topic: "Samkhya Darsana",
+                question: "Filsafat Samkhya karya Rsi Kapila menjelaskan dualisme alam semesta yaitu...",
+                options: [
+                    "A. Dharma dan Adharma",
+                    "B. Purusha (Kesadaran) & Prakriti (Materi)",
+                    "C. Atman dan Maya",
+                    "D. Karma dan Phala"
+                ],
+                answer: 1,
+                explanation: "Samkhya memandang realitas sebagai interaksi Purusha dan Prakriti."
+            },
+            {
+                id: 6,
+                topic: "Yoga Darsana",
+                question: "Definisi Yoga menurut Rsi Patanjali 'Citta Vritti Nirodha' berarti...",
+                options: [
+                    "A. Melakukan ritual fisik",
+                    "B. Pengendalian gejolak pikiran",
+                    "C. Mengulang mantra harian",
+                    "D. Menghafal naskah kuno"
+                ],
+                answer: 1,
+                explanation: "Yoga bertujuan mengendalikan pergerakan atau gejolak pikiran."
+            },
+            {
+                id: 7,
+                topic: "Astanga Yoga",
+                question: "Tahapan puncak tertinggi dalam Astanga Yoga Patanjali dinamakan...",
+                options: [
+                    "A. Asana",
+                    "B. Pranayama",
+                    "C. Samadhi",
+                    "D. Yama"
+                ],
+                answer: 2,
+                explanation: "Samadhi adalah tahapan kedelapan (tertinggi) dalam Astanga Yoga."
+            },
+            {
+                id: 8,
+                topic: "Mimamsa Darsana",
+                question: "Filsafat Mimamsa buatan Rsi Jaimini memiliki fokus utama pada...",
+                options: [
+                    "A. Pelaksanaan ritual Yajna dan Karma-kanda Veda",
+                    "B. Meditasi olah napas",
+                    "C. Susunan materi fisik",
+                    "D. Analisis bahasa Sansekerta"
+                ],
+                answer: 0,
+                explanation: "Mimamsa menekankan kewajiban ritual Yajna dan Dharma."
+            },
+            {
+                id: 9,
+                topic: "Vedanta Darsana",
+                question: "Aliran Vedanta buatan Rsi Badarayana mendasarkan pemikirannya pada kitab suci...",
+                options: [
+                    "A. Samhita",
+                    "B. Upanishad",
+                    "C. Brahmana",
+                    "D. Kalpa"
+                ],
+                answer: 1,
+                explanation: "Vedanta merujuk pada pencerahan filsafat kitab Upanishad."
+            },
+            {
+                id: 10,
+                topic: "Pramāna (Pengetahuan)",
+                question: "Sumber pengetahuan benar yang didapatkan dari pengamatan pancaindra langsung dinamakan...",
+                options: [
+                    "A. Anumana Pramāna",
+                    "B. Pratyaksa Pramāna",
+                    "C. Upamana Pramāna",
+                    "D. Sabda Pramāna"
+                ],
+                answer: 1,
+                explanation: "Pratyaksa Pramāna berasal dari persepsi inderawi secara langsung."
+            }
+        ];
+
+        // Quiz State Engine
+        let currentQIndex = 0;
+        let selectedOption = null;
+        let quizScoreCounter = 0;
+        let quizCorrectCounter = 0;
+        let incorrectTopicsSet = new Set();
+
+        window.onload = function() {
+            loadLocalState();
+            if (!appData.student || !appData.student.isRegistered) {
+                showViewPanel('sec-opening');
+            } else {
+                updateGamificationUI();
+                updateProgressDashboard();
+                showViewPanel('sec-dashboard');
+            }
+        };
+
+        function loadLocalState() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                try {
+                    appData = JSON.parse(raw);
+                } catch(e) {
+                    console.error("Gagal membaca storage local", e);
+                }
+            }
+        }
+
+        function saveLocalState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+            updateGamificationUI();
+            updateProgressDashboard();
+        }
+
+        function triggerToast(icon, title, desc) {
+            const toast = document.getElementById('quest-toast');
+            document.getElementById('toast-icon').innerText = icon;
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-desc').innerText = desc;
+
+            toast.classList.remove('hidden', 'animate-toast');
+            void toast.offsetWidth;
+            toast.classList.add('animate-toast');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3200);
+        }
+
+        function addXP(points, reasonText) {
+            const oldLvl = appData.level;
+            appData.xp += points;
+
+            if (appData.xp >= 450) {
+                appData.level = 4;
+            } else if (appData.xp >= 250) {
+                appData.level = 3;
+            } else if (appData.xp >= 100) {
+                appData.level = 2;
+            } else {
+                appData.level = 1;
+            }
+
+            saveLocalState();
+            triggerToast('⚡', `+${points} XP Diterima!`, reasonText);
+
+            if (appData.level > oldLvl) {
+                setTimeout(() => {
+                    triggerToast('🎉', `NAIK LEVEL ${appData.level}!`, getLevelTitle(appData.level));
+                }, 1000);
+            }
+        }
+
+        function getLevelTitle(lvl) {
+            switch(lvl) {
+                case 1: return "Siswa Jñana";
+                case 2: return "Penjelajah Darsana";
+                case 3: return "Biku Jñana";
+                case 4: return "Acharya Darsana";
+                default: return "Siswa Jñana";
+            }
+        }
+
+        function checkBadgeUnlocks() {
+            let newlyUnlocked = false;
+
+            if (appData.completedSubtopics.pengertian && !appData.badges.astika) {
+                appData.badges.astika = true;
+                newlyUnlocked = true;
+                triggerToast('📜', 'Badge Terbuka!', 'Paham Astika');
+            }
+
+            if (appData.completedSubtopics.saddarsana && appData.completedSubtopics.komparasi && !appData.badges.saddarsana) {
+                appData.badges.saddarsana = true;
+                newlyUnlocked = true;
+                triggerToast('🧠', 'Badge Terbuka!', 'Ahli Sad Darsana');
+            }
+
+            if (appData.completedSubtopics.penerapan && !appData.badges.budi) {
+                appData.badges.budi = true;
+                newlyUnlocked = true;
+                triggerToast('🧘', 'Badge Terbuka!', 'Pengendali Diri');
+            }
+
+            const allMindExplored = Object.values(appData.exploredMindNodes).every(Boolean);
+            if (allMindExplored && !appData.badges.peta) {
+                appData.badges.peta = true;
+                newlyUnlocked = true;
+                triggerToast('🗺️', 'Badge Terbuka!', 'Penjelajah Peta');
+            }
+
+            if (appData.quiz && appData.quiz.score >= 80 && !appData.badges.master) {
+                appData.badges.master = true;
+                newlyUnlocked = true;
+                triggerToast('🏆', 'Badge Terbuka!', 'Master Darsana');
+            }
+
+            if (newlyUnlocked) {
+                saveLocalState();
+            }
+        }
+
+        function showViewPanel(panelId) {
+            const panels = ['sec-opening', 'sec-identitas', 'sec-dashboard', 'sec-questmap', 'sec-materi', 'sec-mindmap', 'sec-kuis', 'sec-profil', 'sec-ringkasan'];
+            
+            panels.forEach(p => {
+                const el = document.getElementById(p);
+                if (el) el.classList.add('hidden');
+            });
+
+            const target = document.getElementById(panelId);
+            if (target) target.classList.remove('hidden');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleNavClick(targetSec) {
+            if ((!appData.student || !appData.student.isRegistered) && targetSec !== 'opening' && targetSec !== 'identitas') {
+                showIdentityError("Isi identitas siswa terlebih dahulu!");
+                showViewPanel('sec-identitas');
+                return;
+            }
+
+            showViewPanel(`sec-${targetSec}`);
+
+            if (targetSec === 'dashboard') {
+                updateDashboardGreeting();
+            }
+        }
+
+        function navigateTo(targetSec) {
+            handleNavClick(targetSec);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function proceedFromOpening() {
+            if (appData.student && appData.student.isRegistered) {
+                showViewPanel('sec-dashboard');
+                updateDashboardGreeting();
+            } else {
+                showViewPanel('sec-identitas');
+            }
+        }
+
+        function showIdentityError(msg) {
+            const errBox = document.getElementById('identitas-error');
+            const errTxt = document.getElementById('identitas-error-text');
+            if (errBox && errTxt) {
+                errTxt.innerText = msg;
+                errBox.classList.remove('hidden');
+            }
+        }
+
+        function submitIdentitas(event) {
+            event.preventDefault();
+            const nama = document.getElementById('input-nama').value.trim();
+            const absen = document.getElementById('input-absen').value.trim();
+            const kelas = document.getElementById('input-kelas').value.trim();
+
+            if (!nama || !absen || !kelas) {
+                showIdentityError("Semua kolom wajib diisi!");
+                return;
+            }
+
+            appData.student = {
+                nama: nama,
+                absen: absen,
+                kelas: kelas,
+                isRegistered: true
+            };
+
+            appData.badges.pencari = true;
+            saveLocalState();
+            
+            document.getElementById('identitas-error').classList.add('hidden');
+            triggerToast('🎓', 'Registrasi Berhasil!', 'Badge "Pencari Kebenaran" Terbuka!');
+
+            showViewPanel('sec-dashboard');
+            updateDashboardGreeting();
+        }
+
+        function openEditIdentityModal() {
+            if (appData.student) {
+                document.getElementById('edit-nama').value = appData.student.nama || '';
+                document.getElementById('edit-absen').value = appData.student.absen || '';
+                document.getElementById('edit-kelas').value = appData.student.kelas || '';
+            }
+            document.getElementById('modal-identity').classList.remove('hidden');
+        }
+
+        function closeEditIdentityModal() {
+            document.getElementById('modal-identity').classList.add('hidden');
+        }
+
+        function saveEditIdentitas(event) {
+            event.preventDefault();
+            const nama = document.getElementById('edit-nama').value.trim();
+            const absen = document.getElementById('edit-absen').value.trim();
+            const kelas = document.getElementById('edit-kelas').value.trim();
+
+            if (!nama || !absen || !kelas) return;
+
+            appData.student.nama = nama;
+            appData.student.absen = absen;
+            appData.student.kelas = kelas;
+            appData.student.isRegistered = true;
+
+            saveLocalState();
+            closeEditIdentityModal();
+            updateDashboardGreeting();
+        }
+
+        function updateGamificationUI() {
+            const title = getLevelTitle(appData.level);
+            document.getElementById('hdr-lvl-badge').innerText = `Lvl ${appData.level}`;
+
+            let targetXP = 100;
+            if (appData.level === 2) targetXP = 250;
+            if (appData.level === 3) targetXP = 450;
+            if (appData.level === 4) targetXP = 600;
+
+            const xpPct = Math.min(100, Math.round((appData.xp / targetXP) * 100));
+            document.getElementById('hdr-xp-bar').style.width = `${xpPct}%`;
+            document.getElementById('hdr-xp-text').innerText = `${appData.xp} XP`;
+
+            document.getElementById('dash-lvl-title').innerText = `Lvl ${appData.level}: ${title}`;
+            document.getElementById('dash-xp-bar').style.width = `${xpPct}%`;
+            document.getElementById('dash-xp-text').innerText = `${appData.xp} XP`;
+            document.getElementById('dash-xp-next').innerText = `Target Lvl ${appData.level + 1}: ${targetXP} XP`;
+
+            document.getElementById('profile-student-name').innerText = appData.student.nama || 'Belum Terdaftar';
+            document.getElementById('profile-student-sub').innerText = `Kelas: ${appData.student.kelas || '-'} | Absen: ${appData.student.absen || '-'}`;
+            document.getElementById('profile-big-avatar').innerText = (appData.student.nama || '?').charAt(0).toUpperCase();
+
+            document.getElementById('prof-lvl-num').innerText = `Lvl ${appData.level}`;
+            document.getElementById('prof-lvl-title').innerText = title;
+            document.getElementById('prof-xp-val').innerText = `${appData.xp} XP`;
+
+            const unlockedCount = Object.values(appData.badges).filter(Boolean).length;
+            document.getElementById('prof-badge-count').innerText = `${unlockedCount} / 6`;
+            document.getElementById('prof-quiz-best').innerText = (appData.quiz && appData.quiz.score !== null) ? appData.quiz.score : 0;
+
+            updateBadgeCard('pencari', appData.badges.pencari);
+            updateBadgeCard('astika', appData.badges.astika);
+            updateBadgeCard('saddarsana', appData.badges.saddarsana);
+            updateBadgeCard('budi', appData.badges.budi);
+            updateBadgeCard('peta', appData.badges.peta);
+            updateBadgeCard('master', appData.badges.master);
+        }
+
+        function updateBadgeCard(key, isUnlocked) {
+            const card = document.getElementById(`badge-card-${key}`);
+            const stat = document.getElementById(`badge-status-${key}`);
+            if (card && stat) {
+                if (isUnlocked) {
+                    card.classList.remove('opacity-50');
+                    stat.innerText = 'Terbuka ✅';
+                    stat.className = 'text-[8px] font-bold text-emerald-600 block';
+                } else {
+                    card.classList.add('opacity-50');
+                    stat.innerText = 'Terkunci 🔒';
+                    stat.className = 'text-[8px] font-bold text-slate-400 block';
+                }
+            }
+        }
+
+        function updateDashboardGreeting() {
+            const badgeName = document.getElementById('badge-name');
+            const badgeAvatar = document.getElementById('badge-avatar');
+
+            if (appData.student && appData.student.isRegistered) {
+                badgeName.innerText = appData.student.nama;
+                badgeAvatar.innerText = appData.student.nama.charAt(0).toUpperCase();
+
+                document.getElementById('dashboard-greeting').innerText = `Selamat belajar, ${appData.student.nama}!`;
+                document.getElementById('dashboard-subtext').innerText = `Kelas: ${appData.student.kelas} | No. Absen: ${appData.student.absen}`;
+            }
+        }
+
+        function openSubtopicReader(topicKey) {
+            appData.lastActiveTopic = topicKey;
+            saveLocalState();
+
+            document.getElementById('materi-selector-box').classList.add('hidden');
+            document.getElementById('materi-reader-box').classList.remove('hidden');
+
+            const bodyEl = document.getElementById('reader-content-body');
+            bodyEl.innerHTML = subtopicContent[topicKey] || '<p>Materi tidak ditemukan.</p>';
+
+            updateSubtopicReaderControls(topicKey);
+            showViewPanel('sec-materi');
+        }
+
+        function closeSubtopicReader() {
+            document.getElementById('materi-reader-box').classList.add('hidden');
+            document.getElementById('materi-selector-box').classList.remove('hidden');
+            showViewPanel('sec-materi');
+        }
+
+        function resumeLastTopic() {
+            openSubtopicReader(appData.lastActiveTopic || 'pengertian');
+        }
+
+        function updateSubtopicReaderControls(topicKey) {
+            const isDone = appData.completedSubtopics && appData.completedSubtopics[topicKey];
+            const btnComplete = document.getElementById('btn-mark-complete');
+            const statusBadge = document.getElementById('reader-topic-status');
+
+            if (isDone) {
+                btnComplete.innerHTML = `<span>✅ Selesai Dipelajari</span>`;
+                btnComplete.className = "w-full py-2 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-700 font-bold text-xs transition flex items-center justify-center gap-1";
+                statusBadge.innerText = "Status: Selesai";
+                statusBadge.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800";
+            } else {
+                btnComplete.innerHTML = `<span>✅ Tandai Bagian Ini Selesai (+50 XP)</span>`;
+                btnComplete.className = "w-full py-2 rounded-xl bg-[#EFF6FF] border border-blue-200 text-[#2563EB] hover:bg-blue-100 font-bold text-xs transition flex items-center justify-center gap-1";
+                statusBadge.innerText = "Status: Sedang dipelajari";
+                statusBadge.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-[#2563EB]";
+            }
+
+            const topicKeys = ['pengertian', 'saddarsana', 'komparasi', 'penerapan'];
+            const idx = topicKeys.indexOf(topicKey);
+
+            const isFirst = (idx === 0);
+            const isLast = (idx === topicKeys.length - 1);
+
+            document.getElementById('btn-topic-prev').disabled = isFirst;
+            document.getElementById('btn-topic-next').disabled = isLast;
+
+            const btnLastHome = document.getElementById('btn-last-home');
+            if (btnLastHome) {
+                if (isLast) {
+                    btnLastHome.classList.remove('hidden');
+                } else {
+                    btnLastHome.classList.add('hidden');
+                }
+            }
+        }
+
+        function toggleMarkTopicComplete() {
+            const currentKey = appData.lastActiveTopic || 'pengertian';
+            if (!appData.completedSubtopics) appData.completedSubtopics = {};
+
+            const wasCompleted = appData.completedSubtopics[currentKey];
+            appData.completedSubtopics[currentKey] = !wasCompleted;
+
+            if (!wasCompleted) {
+                addXP(50, `Selesai subbab materi Darsana`);
+            }
+
+            checkBadgeUnlocks();
+            saveLocalState();
+            updateSubtopicReaderControls(currentKey);
+        }
+
+        function navigateTopicPrev() {
+            const topicKeys = ['pengertian', 'saddarsana', 'komparasi', 'penerapan'];
+            const idx = topicKeys.indexOf(appData.lastActiveTopic);
+            if (idx > 0) openSubtopicReader(topicKeys[idx - 1]);
+        }
+
+        function navigateTopicNext() {
+            const topicKeys = ['pengertian', 'saddarsana', 'komparasi', 'penerapan'];
+            const idx = topicKeys.indexOf(appData.lastActiveTopic);
+            if (idx < topicKeys.length - 1) openSubtopicReader(topicKeys[idx + 1]);
+        }
+
+        function selectMindNode(nodeKey) {
+            if (nodeKey !== 'core' && !appData.exploredMindNodes[nodeKey]) {
+                appData.exploredMindNodes[nodeKey] = true;
+                addXP(20, `Eksplorasi simpul ${nodeKey.toUpperCase()}`);
+                checkBadgeUnlocks();
+            }
+
+            const titleEl = document.getElementById('mind-detail-title');
+            const descEl = document.getElementById('mind-detail-desc');
+            const iconEl = document.getElementById('mind-detail-icon');
+            const extraEl = document.getElementById('mind-detail-extra');
+
+            const mindDetails = {
+                'core': {
+                    title: "🧠 Sad Darsana (Enam Filsafat Ortodoks)",
+                    desc: "Sistem filsafat Hindu Astika yang mengakui keshahihan wahyu Veda.",
+                    icon: "🕉️"
+                },
+                'nyaya': {
+                    title: "🔍 Nyaya Darsana (Rsi Gautama)",
+                    desc: "Filsafat logika & 4 metode pembuktian kebenaran (Pramāna).",
+                    icon: "🔍"
+                },
+                'vaisheshika': {
+                    title: "⚛️ Vaisheshika Darsana (Rsi Kanada)",
+                    desc: "Filsafat atomik (Paramanu) penyusun materi alam fisik.",
+                    icon: "⚛️"
+                },
+                'samkhya': {
+                    title: "☯️ Samkhya Darsana (Rsi Kapila)",
+                    desc: "Dualisme kesadaran (Purusha) dan materi (Prakriti).",
+                    icon: "☯️"
+                },
+                'yoga': {
+                    title: "🧘 Yoga Darsana (Rsi Patanjali)",
+                    desc: "Pengendalian pikiran melalui 8 tahapan Astanga Yoga.",
+                    icon: "🧘"
+                },
+                'mimamsa': {
+                    title: "🔥 Mimamsa Darsana (Rsi Jaimini)",
+                    desc: "Filsafat ritual Yajna & penafsiran Karma-kanda Veda.",
+                    icon: "🔥"
+                },
+                'vedanta': {
+                    title: "✨ Vedanta Darsana (Rsi Badarayana)",
+                    desc: "Pencerahan puncaknya Veda tentang Brahman & Atman.",
+                    icon: "✨"
+                }
+            };
+
+            if (mindDetails[nodeKey]) {
+                titleEl.innerText = mindDetails[nodeKey].title;
+                descEl.innerText = mindDetails[nodeKey].desc;
+                iconEl.innerText = mindDetails[nodeKey].icon;
+            }
+        }
+
+        function startQuizEngine() {
+            if (!appData.student || !appData.student.isRegistered) {
+                showViewPanel('sec-identitas');
+                return;
+            }
+
+            currentQIndex = 0;
+            quizScoreCounter = 0;
+            quizCorrectCounter = 0;
+            selectedOption = null;
+            incorrectTopicsSet.clear();
+
+            document.getElementById('quiz-start-box').classList.add('hidden');
+            document.getElementById('quiz-result-box').classList.add('hidden');
+            document.getElementById('quiz-active-box').classList.remove('hidden');
+
+            renderQuestionCard();
+        }
+
+        function renderQuestionCard() {
+            const q = quizDataset[currentQIndex];
+            selectedOption = null;
+
+            document.getElementById('q-curr-num').innerText = currentQIndex + 1;
+            document.getElementById('q-total-num').innerText = quizDataset.length;
+            document.getElementById('q-topic-tag').innerText = `Materi: ${q.topic}`;
+            document.getElementById('q-question-text').innerText = q.question;
+
+            const pct = ((currentQIndex + 1) / quizDataset.length) * 100;
+            document.getElementById('q-progress-bar').style.width = `${pct}%`;
+
+            const container = document.getElementById('q-options-container');
+            container.innerHTML = '';
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-700 flex items-center justify-between";
+                btn.onclick = () => selectOptionIdx(idx);
+                btn.id = `q-opt-btn-${idx}`;
+                btn.innerHTML = `<span>${optText}</span>`;
+                container.appendChild(btn);
+            });
+
+            document.getElementById('q-feedback-box').classList.add('hidden');
+            document.getElementById('q-check-btn').classList.remove('hidden');
+            document.getElementById('q-check-btn').disabled = true;
+            document.getElementById('q-next-btn').classList.add('hidden');
+            document.getElementById('q-status-text').innerText = "Pilih salah satu jawaban";
+        }
+
+        function selectOptionIdx(idx) {
+            selectedOption = idx;
+
+            quizDataset[currentQIndex].options.forEach((_, i) => {
+                const btn = document.getElementById(`q-opt-btn-${i}`);
+                if (i === idx) {
+                    btn.className = "w-full text-left p-2.5 rounded-xl border-2 border-[#2563EB] bg-[#EFF6FF] text-[#1E3A8A] font-bold text-xs flex items-center justify-between";
+                } else {
+                    btn.className = "w-full text-left p-2.5 rounded-xl border border-slate-200 bg-slate-50 opacity-60 text-xs text-slate-700 flex items-center justify-between";
+                }
+            });
+
+            document.getElementById('q-check-btn').disabled = false;
+            document.getElementById('q-status-text').innerText = "Tekan 'Periksa'";
+        }
+
+        function checkSelectedAnswer() {
+            if (selectedOption === null) return;
+
+            const q = quizDataset[currentQIndex];
+            const isCorrect = (selectedOption === q.answer);
+
+            if (isCorrect) {
+                quizScoreCounter += 10;
+                quizCorrectCounter += 1;
+                addXP(10, `Jawaban benar (+10 XP)`);
+            } else {
+                incorrectTopicsSet.add(q.topic);
+            }
+
+            const fbBox = document.getElementById('q-feedback-box');
+            const fbTitle = document.getElementById('q-feedback-title');
+            const fbDesc = document.getElementById('q-feedback-desc');
+
+            fbBox.classList.remove('hidden');
+            if (isCorrect) {
+                fbBox.className = "p-2.5 rounded-xl text-xs bg-emerald-50 border border-emerald-200 text-emerald-900";
+                fbTitle.innerHTML = "✅ Benar! (+10 XP)";
+            } else {
+                fbBox.className = "p-2.5 rounded-xl text-xs bg-red-50 border border-red-200 text-red-900";
+                fbTitle.innerHTML = `❌ Kurang Tepat (Benar: ${q.options[q.answer].substring(0, 2)})`;
+            }
+            fbDesc.innerText = q.explanation;
+
+            document.getElementById('q-check-btn').classList.add('hidden');
+            document.getElementById('q-next-btn').classList.remove('hidden');
+            document.getElementById('q-status-text').innerText = "Klik 'Selanjutnya'";
+        }
+
+        function nextQuestion() {
+            currentQIndex++;
+            if (currentQIndex < quizDataset.length) {
+                renderQuestionCard();
+            } else {
+                finishQuizEngine();
+            }
+        }
+
+        function finishQuizEngine() {
+            document.getElementById('quiz-active-box').classList.add('hidden');
+            document.getElementById('quiz-result-box').classList.remove('hidden');
+
+            const isFirstCompletion = (!appData.quiz || !appData.quiz.isCompleted);
+            appData.quiz.score = quizScoreCounter;
+            appData.quiz.correctCount = quizCorrectCounter;
+            appData.quiz.isCompleted = true;
+
+            if (isFirstCompletion) {
+                addXP(100, `Evaluasi Selesai (+100 XP)`);
+            }
+
+            checkBadgeUnlocks();
+            saveLocalState();
+
+            document.getElementById('result-student-name').innerText = `${appData.student.nama} (${appData.student.kelas})`;
+            document.getElementById('result-score-val').innerText = quizScoreCounter;
+            document.getElementById('result-correct-count-text').innerText = `Jawaban Benar: ${quizCorrectCounter} dari 10`;
+
+            const hintEl = document.getElementById('result-review-hint');
+            if (incorrectTopicsSet.size > 0) {
+                hintEl.innerText = `Topik perlu diperdalam: ${Array.from(incorrectTopicsSet).join(', ')}.`;
+            } else {
+                hintEl.innerText = "Sempurna! Anda menguasai seluruh konsep kuis.";
+            }
+        }
+
+        function checkAndOpenCertificate() {
+            if (!appData.student || !appData.student.isRegistered) {
+                showViewPanel('sec-identitas');
+                return;
+            }
+
+            const doneSubCount = Object.values(appData.completedSubtopics).filter(Boolean).length;
+            if (doneSubCount < 4 || !appData.quiz || !appData.quiz.isCompleted) {
+                triggerToast('⚠️', 'Sertifikat Belum Siap', 'Selesaikan 4 subbab & kuis evaluasi terlebih dahulu!');
+                navigateTo('questmap');
+                return;
+            }
+
+            document.getElementById('cert-student-name').innerText = appData.student.nama.toUpperCase();
+            document.getElementById('cert-student-class').innerText = `Kelas ${appData.student.kelas} • Absen ${appData.student.absen}`;
+            document.getElementById('cert-lvl').innerText = `Lvl ${appData.level}: ${getLevelTitle(appData.level)}`;
+            document.getElementById('cert-score').innerText = `${appData.quiz.score} / 100`;
+
+            const dateStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('cert-date').innerText = dateStr;
+
+            document.getElementById('modal-certificate').classList.remove('hidden');
+        }
+
+        function closeCertificateModal() {
+            document.getElementById('modal-certificate').classList.add('hidden');
+        }
+
+        function updateProgressDashboard() {
+            let doneSubCount = 0;
+            if (appData.completedSubtopics) {
+                doneSubCount = Object.values(appData.completedSubtopics).filter(Boolean).length;
+            }
+
+            const quizScore = (appData.quiz && appData.quiz.score !== null) ? appData.quiz.score : "Belum";
+            const materiPct = (doneSubCount / 4) * 60;
+            const quizVal = (typeof quizScore === 'number') ? quizScore : 0;
+            const quizPct = (quizVal / 100) * 40;
+            const totalPct = Math.round(materiPct + quizPct);
+
+            document.getElementById('dash-progress-pct').innerText = `${totalPct}%`;
+            document.getElementById('dash-progress-bar').style.width = `${totalPct}%`;
+            document.getElementById('dash-materi-stat').innerText = `Subbab: ${doneSubCount} / 4`;
+            document.getElementById('dash-quiz-stat').innerText = `Kuis: ${typeof quizScore === 'number' ? quizScore + ' Poin' : 'Belum'}`;
+
+            updateTopicBadgeInGrid('pengertian');
+            updateTopicBadgeInGrid('saddarsana');
+            updateTopicBadgeInGrid('komparasi');
+            updateTopicBadgeInGrid('penerapan');
+
+            updateGamificationUI();
+        }
+
+        function updateTopicBadgeInGrid(key) {
+            const isDone = appData.completedSubtopics && appData.completedSubtopics[key];
+            const badge = document.getElementById(`badge-topic-${key}`);
+            if (badge) {
+                if (isDone) {
+                    badge.innerText = "Selesai ✅";
+                    badge.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800";
+                } else {
+                    badge.innerText = "Belum dipelajari";
+                    badge.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
